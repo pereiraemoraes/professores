@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Borracharia do Jorge</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#ece5dd;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    padding:10px;
+}
+
+/* Caixa do chat adaptável */
+.chat{
+    width:100%;
+    max-width:360px;
+    height:90vh;
+    max-height:620px;
+    min-height:500px;
+    background:#fff;
+    display:flex;
+    flex-direction:column;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 8px 20px rgba(0,0,0,.2);
+}
+
+.topo{
+    background:#075E54;
+    color:white;
+    padding:14px 16px;
+}
+
+.topo h2{
+    font-size:18px;
+}
+
+.subtitulo{
+    font-size:12px;
+    opacity:.8;
+    margin-top:3px;
+}
+
+.mensagens{
+    flex:1;
+    padding:12px;
+    overflow-y:auto;
+    background:#e5ddd5;
+}
+
+.msg{
+    display:flex;
+    margin:10px 0;
+}
+
+.usuario{
+    justify-content:flex-end;
+}
+
+.borracharia{
+    justify-content:flex-start;
+}
+
+.bolha{
+    max-width:80%;
+    padding:10px 14px;
+    border-radius:12px;
+    line-height:1.45;
+    white-space:pre-line;
+    word-wrap:break-word;
+    font-size:14px;
+}
+
+.usuario .bolha{
+    background:#DCF8C6;
+}
+
+.borracharia .bolha{
+    background:white;
+}
+
+.rodape{
+    display:flex;
+    gap:8px;
+    padding:10px;
+    background:#f0f0f0;
+}
+
+input{
+    flex:1;
+    padding:10px;
+    border:none;
+    border-radius:8px;
+    outline:none;
+    font-size:14px;
+}
+
+button{
+    background:#128C7E;
+    color:white;
+    border:none;
+    border-radius:8px;
+    padding:10px 16px;
+    cursor:pointer;
+    font-size:14px;
+}
+
+button:hover{
+    background:#0d6f64;
+}
+
+/* Ajuste para telas menores (Chromebooks pequenos) */
+@media (max-height:700px){
+
+    .chat{
+        height:95vh;
+        max-width:340px;
+    }
+
+    .topo{
+        padding:12px;
+    }
+
+    .topo h2{
+        font-size:17px;
+    }
+
+    .bolha{
+        font-size:13px;
+    }
+
+    input,
+    button{
+        font-size:13px;
+    }
+
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="chat">
+
+    <div class="topo">
+        <h2>🔧 Borracharia do Jorge</h2>
+        <div class="subtitulo">última visualização há muito tempo</div>
+    </div>
+
+    <div class="mensagens" id="mensagens">
+
+        <div class="msg borracharia">
+            <div class="bolha">
+<b>Olá! Bem-vindo à Borracharia do Jorge.</b>🔧🔧
+
+Como podemos ajudar?
+            </div>
+        </div>
+
+    </div>
+
+    <div class="rodape">
+        <input
+            id="texto"
+            type="text"
+            placeholder="Digite uma mensagem..."
+            autocomplete="off">
+
+        <button onclick="enviar()">Enviar</button>
+    </div>
+
+</div>
+
+<script>
+
+function adicionarMensagem(texto, classe){
+
+    const mensagens = document.getElementById("mensagens");
+
+    mensagens.innerHTML += `
+        <div class="msg ${classe}">
+            <div class="bolha">${texto}</div>
+        </div>
+    `;
+
+    mensagens.scrollTop = mensagens.scrollHeight;
+}
+
+function enviar(){
+
+    const campo = document.getElementById("texto");
+    const texto = campo.value.trim();
+
+    if(texto === "") return;
+
+    adicionarMensagem(texto, "usuario");
+
+    campo.value = "";
+
+    setTimeout(() => {
+
+        let resposta;
+
+        if(texto.toLowerCase() === "preciso remendar"){
+
+            resposta = `Ah, era sobre isso que queria falar? 💰💰💰
+
+Qual valor precisa? Nós cobramos juros de 10% ao mês até a quitação. É pegar ou largar.
+
+Só não emprestamos para professores do município. Esses a gente precisa cobrar de maneiras diferentes.`;
+
+        }else{
+
+            resposta = `<b>Borracharia do Jorge agradece seu contato!🔧.</b>
+
+No momento não estamos disponíveis.
+
+🛞Aproveite nossa promoção de pneus Goodyear com 30% de desconto no mês da diversidade.`;
+
+        }
+
+        adicionarMensagem(resposta, "borracharia");
+
+    }, 800);
+
+}
+
+document.getElementById("texto").addEventListener("keydown", function(e){
+
+    if(e.key === "Enter"){
+        enviar();
+    }
+
+});
+
+</script>
+
+</body>
+</html>
